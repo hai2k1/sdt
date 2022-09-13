@@ -1,0 +1,9 @@
+{
+    "name": "Bycode",
+    "namespace": "Botble\\Bycode\\",
+    "provider": "Botble\\Bycode\\Providers\\BycodeServiceProvider",
+    "author": "N/A",
+    "url": "N/A",
+    "version": "1.0",
+    "description": "The description for module bycode"
+}
