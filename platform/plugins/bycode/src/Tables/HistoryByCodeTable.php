@@ -10,9 +10,9 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Yajra\DataTables\DataTables;
 use Html;
 
-class BycodeTable extends TableAbstract
+class HistoryByCodeTable extends TableAbstract
 {
-    protected $hasOperations= true;
+    protected $hasOperations= false;
 
     /**
      * @var bool
@@ -23,7 +23,6 @@ class BycodeTable extends TableAbstract
      * @var bool
      */
     protected $hasFilter = false;
-    protected $view = 'plugins/bycode::table';
 
     /**
      * BycodeTable constructor.
@@ -37,10 +36,6 @@ class BycodeTable extends TableAbstract
 
         $this->repository = $bycodeRepository;
 
-        if (!Auth::user()->hasAnyPermission(['bycode.edit', 'bycode.destroy'])) {
-            $this->hasOperations = false;
-            $this->hasActions = false;
-        }
     }
 
     /**
@@ -58,9 +53,6 @@ class BycodeTable extends TableAbstract
             })
             ->editColumn('status', function ($item) {
                 return $item->status->toHtml();
-            })
-            ->addColumn('operations', function ($item) {
-                return $this->getOperations('', 'bycode.destroy', $item);
             });
 
         return $this->toJson($data);
@@ -77,11 +69,10 @@ class BycodeTable extends TableAbstract
                 'name_app',
                 'phone_number',
                 'code',
-                'session',
                 'id_user',
                 'created_at',
                 'status',
-            ])->where('id_user',Auth::user()->id)->orderBy('id', 'DESC')->limit(10);
+            ])->where('id_user',Auth::user()->id)->whereNotNull('code')->orderBy('id', 'DESC')->limit(10);
 
         return $this->applyScopes($query);
     }
@@ -118,10 +109,6 @@ class BycodeTable extends TableAbstract
     /**
      * {@inheritDoc}
      */
-//    public function buttons()
-//    {
-//        return $this->addCreateButton(route('bycode.create'), 'bycode.create');
-//    }
 
     /**
      * {@inheritDoc}
@@ -158,8 +145,4 @@ class BycodeTable extends TableAbstract
     /**
      * @return array
      */
-//    public function getFilters(): array
-//    {
-//        return $this->getBulkChanges();
-//    }
 }

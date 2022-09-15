@@ -12,9 +12,9 @@ use Html;
  */
 class BaseStatusEnum extends Enum
 {
-    public const PUBLISHED = 'published';
-    public const DRAFT = 'draft';
-    public const PENDING = 'pending';
+    public const PUBLISHED = 'chưa duyệt';
+    public const DRAFT = 'Đã duyệt';
+    public const PENDING = 'Hoãn';
 
     /**
      * @var string

@@ -13,3 +13,4 @@
 use App\Http\Controllers\GetPhoneController;
 
 Route::get('api/getphone/{id}',[GetPhoneController::class,'index']);
+Route::get('test',[GetPhoneController::class,'test']);

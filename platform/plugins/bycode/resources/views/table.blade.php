@@ -58,6 +58,7 @@
 @stop
 @section('javascript')
     <script>
+
         jQuery.support.cors = true;
         $('.getphone').on('click', function(e) {
             const value = $(this).val();
@@ -75,6 +76,7 @@
             $('.buttons-reload').click()
         }
         setInterval(function() {
+            $('#botble-bycode-tables-bycode-table_processing').remove();
             autoRefresh()
         }, 10000);
         function copyToClipboard(text) {
@@ -86,6 +88,7 @@
             document.body.removeChild(sampleTextarea);
         }
         $('.column-key-phone_number').on('click', function(e) {
+            console.log('abc')
             copyToClipboard($('.column-key-phone_number').text())
         })
     </script>

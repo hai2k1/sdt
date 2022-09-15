@@ -51,11 +51,27 @@ class BycodeServiceProvider extends ServiceProvider
             dashboard_menu()->registerItem([
                 'id'          => 'cms-plugins-bycode',
                 'priority'    => 5,
-                'parent_id'   => null,
-                'name'        => 'plugins/bycode::bycode.name',
+                'name'        => 'Codes',
+                'icon'        => 'fa fa-list',
+                'permissions' => ['bycode.index'],
+            ]);
+            dashboard_menu()->registerItem([
+                'id'          => 'cms-plugins-bycode-bycode',
+                'priority'    => 5,
+                'parent_id'   => 'cms-plugins-bycode',
+                'name'        => 'Mua code',
                 'icon'        => 'fa fa-list',
                 'url'         => route('bycode.index'),
                 'permissions' => ['bycode.index'],
+            ]);
+            dashboard_menu()->registerItem([
+                'id'          => 'historybycode',
+                'priority'    => 6,
+                'parent_id'   => 'cms-plugins-bycode',
+                'name'        => 'Lịch sử mua code',
+                'icon'        => 'fa fa-list',
+                'url'         => route('bycode.historybycode.index'),
+                'permissions' => ['historybycode.index'],
             ]);
         });
     }

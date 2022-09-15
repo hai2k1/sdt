@@ -11,6 +11,7 @@ Route::group(['namespace' => 'Botble\Bycode\Http\Controllers', 'middleware' => [
                 'uses'       => 'BycodeController@deletes',
                 'permission' => 'bycode.destroy',
             ]);
+            Route::resource('historybycode', 'HistoryByCodeController')->parameters(['' => 'historybycode']);
         });
     });
 
