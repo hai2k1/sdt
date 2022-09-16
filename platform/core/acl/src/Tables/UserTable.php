@@ -135,6 +135,7 @@ class UserTable extends TableAbstract
                 'users.id as id',
                 'username',
                 'email',
+                'money',
                 'roles.name as role_name',
                 'roles.id as role_id',
                 'users.updated_at as updated_at',
@@ -161,6 +162,10 @@ class UserTable extends TableAbstract
             ],
             'role_name'  => [
                 'title'      => trans('core/acl::users.role'),
+                'searchable' => false,
+            ],
+            'money'  => [
+                'title'      => 'Tiền',
                 'searchable' => false,
             ],
             'created_at' => [

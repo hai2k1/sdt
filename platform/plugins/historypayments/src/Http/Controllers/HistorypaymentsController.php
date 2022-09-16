@@ -2,6 +2,7 @@
 
 namespace Botble\Historypayments\Http\Controllers;
 
+use App\Models\User;
 use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\Historypayments\Http\Requests\HistorypaymentsRequest;
 use Botble\Historypayments\Repositories\Interfaces\HistorypaymentsInterface;
@@ -48,7 +49,7 @@ class HistorypaymentsController extends BaseController
      */
     public function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/historypayments::historypayments.create'));
+        page_title()->setTitle('tao nap tien');
 
         return $formBuilder->create(HistorypaymentsForm::class)->renderForm();
     }
@@ -100,7 +101,11 @@ class HistorypaymentsController extends BaseController
         $historypayments->fill($request->input());
 
         $historypayments = $this->historypaymentsRepository->createOrUpdate($historypayments);
-
+        if ($historypayments->status == 'Đã duyệt') {
+            $user = User::find($historypayments->user_id);
+            $user->money = $user->money + $historypayments->money;
+            $user->save();
+        }
         event(new UpdatedContentEvent(HISTORYPAYMENTS_MODULE_SCREEN_NAME, $request, $historypayments));
 
         return $response

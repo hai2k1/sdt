@@ -28,12 +28,23 @@ class HistorypaymentsForm extends FormAbstract
             ->withCustomFields()
             ->add('name_bank_account', 'text', [
                 'label' => 'tên tài khoản ngân hàng',
-                'label_attr' => ['class' => 'control-label required'],
+                'label_attr' => [
+                    'class' => 'control-label required'],
                 'attr' => [
                     'placeholder' => 'tên tài khoản ngân hàng',
                     'data-counter' => 120,
-                    'value' => 'abc'
                 ],
+
+            ])
+            ->add('user_id', 'text', [
+                'label' => 'user_id',
+                'label_attr' => ['class' => 'control-label required d-none'],
+                'attr' => [
+                    'placeholder' => 'id bank',
+                    'data-counter' => 120,
+                    'class' => 'd-none',
+                ],
+                'default_value' => Auth::user()->id
             ])
             ->add('bank_id', 'text', [
                 'label' => 'id bank',

@@ -35,11 +35,6 @@ class HistorypaymentsTable extends TableAbstract
         parent::__construct($table, $urlGenerator);
 
         $this->repository = $historypaymentsRepository;
-
-//        if (!Auth::user()->hasAnyPermission(['historypayments.edit', 'historypayments.destroy'])) {
-////            $this->hasOperations = false;
-////            $this->hasActions = false;
-//        }
     }
 
     /**
@@ -87,7 +82,10 @@ class HistorypaymentsTable extends TableAbstract
                 'created_at',
                 'status',
             ]);
-
+        if(Auth::user()->isSuperUser()){
+            return $this->applyScopes($query);
+        }
+        $query->where('user_id', Auth::user()->id);
         return $this->applyScopes($query);
     }
 
